@@ -18,6 +18,9 @@ namespace STIUApp.Models
 
 
         public bool Taken { get; set; }
+        public string Status { get; set; }
+
+
 
         public virtual Course Course { get; set; }
         public virtual Student Student { get; set; }

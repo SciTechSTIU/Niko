@@ -42,7 +42,116 @@
             @Html.DisplayFor(model => model.Faculty)
         </dd>
 
+        <dt>Students Completed</dt>
+        <dd>
+            @{
+                int countc=0;
+                    foreach (var item in Model.Enrollments)
+                    {
+                        if(item.Status == "Completed") {
+                        countc++;
+                        }
+                    }
+                <span>@countc</span>
+            }
+                
+        </dd>
+
+        <dt>Students Enrolled</dt>
+        <dd>
+            @{
+                int counte = 0;
+                foreach (var item in Model.Enrollments)
+                {
+                    if (item.Status == "Enrolled")
+                    {
+                        counte++;
+                    }
+                }
+                <span>@counte</span>
+            }
+
+        </dd>
+
+        <dt>Students Not Yet Taken</dt>
+        <dd>
+            @{
+                int countn = 0;
+                foreach (var item in Model.Enrollments)
+                {
+                    if (item.Status == "Not Taken")
+                    {
+                        countn++;
+                    }
+                }
+                <span>@countn</span>
+            }
+
+        </dd>
+
     </dl>
+
+    <table class="table">
+        <tr>
+            <th>Student ID</th>
+            <th>Name</th>
+            <th>
+                Prereq Course: 
+            @*If the course has a prereq course, show it. Otherwise empty.*@
+                @if (Model.Prereq != null)
+            {
+                    
+                    @Html.DisplayFor(model => model.Prereq)
+            }
+                else
+                {
+                    <span>None</span>
+                }
+            
+            </th>
+
+            <th>Status</th>
+            <th>Major</th>
+        </tr>
+
+        @foreach (var item in Model.Enrollments)
+        {
+            <tr>
+                <td> @Html.DisplayFor(modelItem => item.Student.StudentID) </td>
+                <td> @Html.DisplayFor(modelItem => item.Student.FirstName) @Html.DisplayFor(modelItem => item.Student.LastName) </td>
+                <td>
+                    
+                    @{
+                        string precourse = Model.Prereq;
+
+                        foreach (var i in Model.Enrollments)
+                        {
+                            if (Model.Prereq == i.Course.CourseID)
+                            {  
+                                if (i.Taken)
+                                {
+                                    <span>Completed</span>
+                                    break;
+                                }
+                                else
+                                {
+                                    <span>Incomplete</span>
+                                    break;
+                                }
+                            }
+                        }
+                        
+                    }
+                      
+                </td>
+                <td> @Html.DisplayFor(modelItem => item.Status) </td>
+                <td> @Html.DisplayFor(modelItem => item.Student.Major) </td>
+            </tr>
+        }
+
+    </table> 
+
+
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.CourseID }) |

@@ -37,7 +37,7 @@ namespace STIUApp.DAL
             {
                 new Course{CourseID="ITE221", Title="Programming 1", Credits= 3, Faculty = "IT"},
                 new Course{CourseID="ITE222", Title="Programming 2", Credits= 3, Prereq = "ITE221", Faculty = "IT"},
-                new Course{CourseID="ITE223", Title="Programming 3", Credits= 3, Prereq = "ITE223", Faculty = "IT"},
+                new Course{CourseID="ITE223", Title="Programming 3", Credits= 3, Prereq = "ITE222", Faculty = "IT"},
                 new Course{CourseID="ITE101", Title="Introduction to Information Systems", Credits= 3, Faculty = "IT"},
                 new Course{CourseID="ITE120", Title="Website Construction and Management", Credits= 3, Faculty = "IT"},
             };
@@ -48,17 +48,17 @@ namespace STIUApp.DAL
             //Create a new enrollment List with some enrollment data
             var enrollments = new List<Enrollment>
             {
-                new Enrollment{StudentID = 212210006, CourseID="ITE221", Taken = true},
-                new Enrollment{StudentID = 212210006, CourseID="ITE222", Taken = true},
-                new Enrollment{StudentID = 212210006, CourseID="ITE223", Taken = false},
-                new Enrollment{StudentID = 212210006, CourseID="ITE101", Taken = true},
-                new Enrollment{StudentID = 212210006, CourseID="ITE120", Taken = false},
+                new Enrollment{StudentID = 212210006, CourseID="ITE221", Taken = true, Status = "Completed"},
+                new Enrollment{StudentID = 212210006, CourseID="ITE222", Taken = true, Status = "Completed"},
+                new Enrollment{StudentID = 212210006, CourseID="ITE223", Taken = false, Status = "Not Taken"},
+                new Enrollment{StudentID = 212210006, CourseID="ITE101", Taken = true, Status = "Completed"},
+                new Enrollment{StudentID = 212210006, CourseID="ITE120", Taken = false, Status = "Enrolled"},
 
-                new Enrollment{StudentID = 212210003, CourseID="ITE221", Taken = true},
-                new Enrollment{StudentID = 212210003, CourseID="ITE222", Taken = true},
-                new Enrollment{StudentID = 212210003, CourseID="ITE223", Taken = false},
-                new Enrollment{StudentID = 212210003, CourseID="ITE101", Taken = true},
-                new Enrollment{StudentID = 212210003, CourseID="ITE120", Taken = true},
+                new Enrollment{StudentID = 212210003, CourseID="ITE221", Taken = true, Status = "Completed"},
+                new Enrollment{StudentID = 212210003, CourseID="ITE222", Taken = true, Status = "Completed"},
+                new Enrollment{StudentID = 212210003, CourseID="ITE223", Taken = false, Status = "Enrolled"},
+                new Enrollment{StudentID = 212210003, CourseID="ITE101", Taken = true, Status = "Completed"},
+                new Enrollment{StudentID = 212210003, CourseID="ITE120", Taken = true, Status = "Not Taken"},
             };
             enrollments.ForEach(s => context.Enrollments.Add(s));
             context.SaveChanges();

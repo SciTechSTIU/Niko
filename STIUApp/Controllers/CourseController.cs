@@ -36,6 +36,24 @@ namespace STIUApp.Controllers
             return View(course);
         }
 
+
+        public int GetStatusAmount(string status)
+        {
+            int count = 0;
+            var enrollments = db.Enrollments.ToList();
+
+            foreach (var item in enrollments)
+            {
+                if (item.Status == status)
+                {
+                    count++;
+                }
+                
+            }
+            return count;
+        }
+
+
         // GET: Course/Create
         public ActionResult Create()
         {
