@@ -11,10 +11,13 @@ namespace STIUApp.Models
         //Let the user set the primary key instead of generating automatically
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string CourseID { get; set; }
+
         public string Prereq { get; set; }
         public string Title { get; set; }
         public int Credits { get; set; }
         public string Faculty { get; set; }
+
+        public string Type { get; set; }
 
 
         //Course entity can be related to any number of Enrollment entities

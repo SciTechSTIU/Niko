@@ -15,7 +15,10 @@ namespace STIUApp.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Major { get; set; }
+        public string Minor { get; set; }
 
+
+        //Foreign key: enrollment (every student can have many enrollments)
         public virtual ICollection<Enrollment> Enrollments { get; set; }
 
 

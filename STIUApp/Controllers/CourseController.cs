@@ -36,6 +36,16 @@ namespace STIUApp.Controllers
             return View(course);
         }
 
+        public int GetEnrolledAmount(string id)
+        {
+            int enrolled = 0;
+
+            Course course = db.Courses.Find(id);
+ 
+
+            return enrolled;
+
+        }
 
         public int GetStatusAmount(string status)
         {
