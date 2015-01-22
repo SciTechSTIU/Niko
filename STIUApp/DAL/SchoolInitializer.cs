@@ -36,10 +36,12 @@ namespace STIUApp.DAL
             var courses = new List<Course>
             {
                 new Course{CourseID="ITE221", Title="Programming 1", Credits= 3, Faculty = "IT", Type = "Basic Core"},
-                new Course{CourseID="ITE222", Title="Programming 2", Credits= 3, Prereq = "ITE221", Faculty = "IT"},
-                new Course{CourseID="ITE223", Title="Programming 3", Credits= 3, Prereq = "ITE222", Faculty = "IT"},
-                new Course{CourseID="ITE101", Title="Introduction to Information Systems", Credits= 3, Faculty = "IT"},
-                new Course{CourseID="ITE120", Title="Website Construction and Management", Credits= 3, Faculty = "IT"},
+                new Course{CourseID="ITE222", Title="Programming 2", Credits= 3, Prereq = "ITE221", Faculty = "Major Requisites"},
+                new Course{CourseID="ITE101", Title="Introduction to Information Technology", Credits= 3, Faculty = "Basic Core"},
+                new Course{CourseID="ITE120", Title="Web Development 1", Credits= 3, Faculty = "Basic Core"},
+                new Course{CourseID="BUS206", Title="Principles of Management", Credits= 3, Faculty = "Basic Core"},
+                new Course{CourseID="ENG223", Title="Presentation Skills", Credits= 3, Faculty = "Basic Core"},
+                new Course{CourseID="ITE201", Title="IT Service Desk & Incident Management", Credits= 3, Faculty = "Basic Core"},
             };
 
             courses.ForEach(s => context.Courses.Add(s));
