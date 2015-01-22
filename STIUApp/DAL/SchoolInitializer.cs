@@ -35,7 +35,7 @@ namespace STIUApp.DAL
             //Create a new course List with some example courses
             var courses = new List<Course>
             {
-                new Course{CourseID="ITE221", Title="Programming 1", Credits= 3, Faculty = "IT"},
+                new Course{CourseID="ITE221", Title="Programming 1", Credits= 3, Faculty = "IT", Type = "Basic Core"},
                 new Course{CourseID="ITE222", Title="Programming 2", Credits= 3, Prereq = "ITE221", Faculty = "IT"},
                 new Course{CourseID="ITE223", Title="Programming 3", Credits= 3, Prereq = "ITE222", Faculty = "IT"},
                 new Course{CourseID="ITE101", Title="Introduction to Information Systems", Credits= 3, Faculty = "IT"},
