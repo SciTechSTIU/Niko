@@ -48,6 +48,7 @@ namespace STIUApp.DAL
                 new Course{CourseID="LIB214", Title="Creative Thinking", Credits= 3, Faculty = "IT", Type="Basic Core"},
                 new Course{CourseID="SCI111", Title="Physic for Everyday life", Credits= 3, Faculty = "IT", Type="Basic Core"},
                 new Course{CourseID="ITE220", Title="Web Development 2", Credits= 3, Faculty = "IT", Type="Major Requisite"},
+
             };
 
             courses.ForEach(s => context.Courses.Add(s));

@@ -16,7 +16,6 @@ namespace STIUApp.Models
         public string Title { get; set; }
         public int Credits { get; set; }
         public string Faculty { get; set; }
-
         //Course type: BC, MJ etc.
         public string Type { get; set; }
 
