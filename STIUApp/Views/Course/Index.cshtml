@@ -59,6 +59,9 @@
             @Html.DisplayFor(modelItem => item.Faculty)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.CourseID }) |
             @Html.ActionLink("Details", "Details", new { id=item.CourseID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.CourseID })
