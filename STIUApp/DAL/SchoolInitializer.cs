@@ -36,12 +36,18 @@ namespace STIUApp.DAL
             var courses = new List<Course>
             {
                 new Course{CourseID="ITE221", Title="Programming 1", Credits= 3, Faculty = "IT", Type = "Basic Core"},
-                new Course{CourseID="ITE222", Title="Programming 2", Credits= 3, Prereq = "ITE221", Faculty = "Major Requisites"},
-                new Course{CourseID="ITE101", Title="Introduction to Information Technology", Credits= 3, Faculty = "Basic Core"},
-                new Course{CourseID="ITE120", Title="Web Development 1", Credits= 3, Faculty = "Basic Core"},
-                new Course{CourseID="BUS206", Title="Principles of Management", Credits= 3, Faculty = "Basic Core"},
-                new Course{CourseID="ENG223", Title="Presentation Skills", Credits= 3, Faculty = "Basic Core"},
-                new Course{CourseID="ITE201", Title="IT Service Desk & Incident Management", Credits= 3, Faculty = "Basic Core"},
+                new Course{CourseID="ITE222", Title="Programming 2", Credits= 3, Prereq = "ITE221", Faculty = "IT", Type ="Major Requisite"},
+                new Course{CourseID="ITE101", Title="Introduction to Information Technology", Credits= 3, Faculty = "IT", Type="Basic Core"},
+                new Course{CourseID="ITE120", Title="Web Development 1", Credits= 3, Faculty="IT" ,Type = "Basic Core"},
+                new Course{CourseID="BUS206", Title="Principles of Management", Credits= 3, Faculty="IT",Type = "Basic Core"},
+                new Course{CourseID="ENG223", Title="Presentation Skills", Credits= 3, Faculty="IT" ,Type = "Basic Core"},
+                new Course{CourseID="ITE201", Title="IT Service Desk & Incident Management", Credits= 3, Prereq="ITE101" ,Faculty = "IT", Type="Basic Core"},
+                new Course{CourseID="ITE231", Title="Fundamentals Of System Administration", Credits= 3, Prereq="ITE221" ,Faculty = "IT", Type="Basic Core"},
+                new Course{CourseID="ITE235", Title="Mobile Applicaion Architecture", Credits= 3, Prereq="ITE101", Faculty = "IT", Type="Basic Core"},
+                new Course{CourseID="LIB213", Title="Critical Thinking", Credits= 3, Faculty = "IT", Type="Basic Core"},
+                new Course{CourseID="LIB214", Title="Creative Thinking", Credits= 3, Faculty = "IT", Type="Basic Core"},
+                new Course{CourseID="SCI111", Title="Physic for Everyday life", Credits= 3, Faculty = "IT", Type="Basic Core"},
+                new Course{CourseID="ITE220", Title="Web Development 2", Credits= 3, Faculty = "IT", Type="Major Requisite"},
             };
 
             courses.ForEach(s => context.Courses.Add(s));
