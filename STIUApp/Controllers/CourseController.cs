@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using STIUApp.DAL;
 using STIUApp.Models;
+using PagedList;
 
 namespace STIUApp.Controllers
 {
@@ -16,9 +17,112 @@ namespace STIUApp.Controllers
         private SchoolContext db = new SchoolContext();
 
         // GET: Course
-        public ActionResult Index()
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.Courses.ToList());
+
+            UpdateCourseEnrolled(db);
+
+            ViewBag.NotTakenSortParm = String.IsNullOrEmpty(sortOrder) ? "nottaken_desc" : "";
+            ViewBag.NotTakenSortParm = sortOrder == "NotTaken" ? "nottaken_desc" : "NotTaken";
+            ViewBag.CompletedSortParm = sortOrder == "Completed" ? "completed_desc" : "Completed";
+            ViewBag.EnrolledSortParm = sortOrder == "Enrolled" ? "enrolled_desc" : "Enrolled";
+            ViewBag.TypeSortParm = sortOrder == "Type" ? "type_desc" : "Type";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
+
+            var courses = from s in db.Courses
+                           select s;
+
+            //Search if search box is not empty
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                courses = courses.Where(s =>
+                    s.Title.ToUpper().Contains(searchString.ToUpper())
+                    ||
+                    s.CourseID.ToUpper().Contains(searchString.ToUpper()) 
+                    ||
+                    s.Type.ToString().Contains(searchString) 
+                    ||
+                    s.Faculty.ToUpper().Contains(searchString.ToUpper())
+                    );
+
+            }
+
+            switch (sortOrder)
+            {
+                case "Completed":
+                    courses = courses.OrderBy(s => s.Completed);
+                    break;
+                case "completed_desc":
+                    courses = courses.OrderByDescending(s => s.Completed);
+                    break;
+                case "Enrolled":
+                    courses = courses.OrderBy(s => s.Enrolled);
+                    break;
+                case "enrolled_desc":
+                    courses = courses.OrderByDescending(s => s.Enrolled);
+                    break;
+                case "NotTaken":
+                    courses = courses.OrderBy(s => s.NotTaken);
+                    break;
+                case "nottaken_desc":
+                    courses = courses.OrderByDescending(s => s.NotTaken);
+                    break;
+                case "Type":
+                    courses = courses.OrderBy(s => s.Type);
+                    break;
+                case "type_desc":
+                    courses = courses.OrderByDescending(s => s.Type);
+                    break;
+                default:
+                    courses = courses.OrderByDescending(s => s.NotTaken);
+                    break;
+            }
+            int pageSize = 50;
+            int pageNumber = (page ?? 1);
+            return View(courses.ToPagedList(pageNumber, pageSize));
+        }
+
+
+        //Update the number of enrolled/unenrolled/not taken for the course
+
+        public void UpdateCourseEnrolled(SchoolContext db)
+        {
+
+            ICollection<Course> AllCourses = db.Courses.ToList();
+            int c=0, e=0, nt=0;
+
+            try
+            {
+                foreach (var item in AllCourses)
+                {
+                    c = item.Enrollments.Count(s => s.Status == "Completed");
+                    item.Completed = c;
+                    db.SaveChanges();
+
+                    e = item.Enrollments.Count(s => s.Status == "Enrolled");
+                    item.Enrolled = e;
+                    db.SaveChanges();
+
+                    nt = item.Enrollments.Count(s => s.Status == "Not Taken");
+                    item.NotTaken = nt;
+                    db.SaveChanges();
+                } 
+            } 
+
+            catch (Exception ex) 
+                {
+                    Console.WriteLine(ex.InnerException);
+                }
         }
 
         // GET: Course/Details/5
@@ -36,32 +140,6 @@ namespace STIUApp.Controllers
             return View(course);
         }
 
-        public int GetEnrolledAmount(string id)
-        {
-            int enrolled = 0;
-
-            Course course = db.Courses.Find(id);
- 
-
-            return enrolled;
-
-        }
-
-        public int GetStatusAmount(string status)
-        {
-            int count = 0;
-            var enrollments = db.Enrollments.ToList();
-
-            foreach (var item in enrollments)
-            {
-                if (item.Status == status)
-                {
-                    count++;
-                }
-                
-            }
-            return count;
-        }
 
 
         // GET: Course/Create

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace STIUApp.DAL
 {
-    public class SchoolInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<SchoolContext>
+    public class SchoolInitializer : System.Data.Entity.DropCreateDatabaseAlways<SchoolContext>
     {
         //Seed function to create test data
         protected override void Seed(SchoolContext context)
@@ -86,15 +86,18 @@ namespace STIUApp.DAL
             {
                 new Enrollment{StudentID = 212210006, CourseID="ITE221", Taken = true, Status = "Completed"},
                 new Enrollment{StudentID = 212210006, CourseID="ITE222", Taken = true, Status = "Completed"},
-                new Enrollment{StudentID = 212210006, CourseID="ITE223", Taken = false, Status = "Not Taken"},
                 new Enrollment{StudentID = 212210006, CourseID="ITE101", Taken = true, Status = "Completed"},
                 new Enrollment{StudentID = 212210006, CourseID="ITE120", Taken = false, Status = "Enrolled"},
+                new Enrollment{StudentID = 212210006, CourseID="ITE452", Taken = false, Status = "Not Taken"},
+
+
+
 
                 new Enrollment{StudentID = 212210003, CourseID="ITE221", Taken = true, Status = "Completed"},
                 new Enrollment{StudentID = 212210003, CourseID="ITE222", Taken = true, Status = "Completed"},
-                new Enrollment{StudentID = 212210003, CourseID="ITE223", Taken = false, Status = "Enrolled"},
                 new Enrollment{StudentID = 212210003, CourseID="ITE101", Taken = true, Status = "Completed"},
                 new Enrollment{StudentID = 212210003, CourseID="ITE120", Taken = true, Status = "Not Taken"},
+                new Enrollment{StudentID = 212210003, CourseID="ITE452", Taken = false, Status = "Not Taken"},
             };
             enrollments.ForEach(s => context.Enrollments.Add(s));
             context.SaveChanges();

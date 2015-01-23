@@ -1,7 +1,9 @@
-﻿@model IEnumerable<STIUApp.Models.Course>
+﻿@model PagedList.IPagedList<STIUApp.Models.Course>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Courses";
 }
 
 <h2>Index</h2>
@@ -9,28 +11,44 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm("Index", "Course", FormMethod.Get))
+{
+    <p>
+        Find: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" class="btn btn-default" value="Search" />
+    </p>
+}
+
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CourseID)
+            @Html.ActionLink("CourseID", "Index", new { sortOrder = ViewBag.CourseIDSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Prereq)
+            Prereq
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Credits)
+            Credits
         </th>
         <th>
-            Students Need to Take
+            @Html.ActionLink("Completed", "Index", new { sortOrder = ViewBag.CompletedSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Faculty)
+            @Html.ActionLink("Enrolled", "Index", new { sortOrder = ViewBag.EnrolledSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Type)
+            @Html.ActionLink("NotTaken", "Index", new { sortOrder = ViewBag.NotTakenSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Faculty", "Index", new { sortOrder = ViewBag.FacultySortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Type", "Index", new { sortOrder = ViewBag.TypeSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th></th>
     </tr>
@@ -38,22 +56,27 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.CourseID)
+            @*@Html.DisplayFor(modelItem => item.CourseID)*@
+            @Html.ActionLink(item.CourseID, "Details", new { id = item.CourseID })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Prereq)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Title)
+            @*@Html.DisplayFor(modelItem => item.Title)*@
+            @Html.ActionLink(item.Title, "Details", new { id = item.CourseID })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Credits)
         </td>
         <td>
-            
-
-
-
+            @item.Enrollments.Count(s => s.Status == "Completed").ToString()
+        </td>
+        <td>
+            @item.Enrollments.Count(s => s.Status == "Enrolled").ToString()
+        </td>
+        <td>
+            @item.Enrollments.Count(s => s.Status == "Not Taken").ToString()
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Faculty)
@@ -70,3 +93,15 @@
 }
 
 </table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new
+    {
+        page,
+        sortOrder = ViewBag.CurrentSort,
+        currentFilter = ViewBag.CurrentFilter
+    }))
+
+

@@ -64,7 +64,7 @@ namespace STIUApp.Controllers
                     students = students.OrderBy(s => s.LastName);
                     break;
             }
-            int pageSize = 3; 
+            int pageSize = 50; 
             int pageNumber = (page ?? 1); 
             return View(students.ToPagedList(pageNumber, pageSize));
         }

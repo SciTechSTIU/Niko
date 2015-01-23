@@ -19,6 +19,11 @@ namespace STIUApp.Models
         //Course type: BC, MJ etc.
         public string Type { get; set; }
 
+        //Number of unenrolled/enrolled/not taken
+        public int Completed { get; set; }
+        public int Enrolled { get; set; }
+        public int NotTaken { get; set; }
+
 
         //Course entity can be related to any number of Enrollment entities
         public virtual ICollection<Enrollment> Enrollments { get; set; }
