@@ -22,10 +22,13 @@ namespace STIUApp.Controllers
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.MajorSortParm = sortOrder == "Major" ? "major_desc" : "Major";
 
-            if (searchString != null) {
-                page = 1; 
-            } else { 
-                searchString = currentFilter; 
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
             }
             ViewBag.CurrentFilter = searchString;
 
@@ -34,18 +37,18 @@ namespace STIUApp.Controllers
                            select s;
 
             //Search if search box is not empty
-            if (!String.IsNullOrEmpty(searchString)) 
-            { 
-                students = students.Where(s => 
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                students = students.Where(s =>
                     s.LastName.ToUpper().Contains(searchString.ToUpper()) //Search by last name
-                    || 
+                    ||
                     s.FirstName.ToUpper().Contains(searchString.ToUpper()) //Search by first name
                     ||
                     s.StudentID.ToString().Contains(searchString) //Search by student id
                     ||
                     s.Major.ToUpper().Contains(searchString.ToUpper()) //Search by major
-                    ); 
-                    
+                    );
+
             }
 
 
@@ -64,8 +67,8 @@ namespace STIUApp.Controllers
                     students = students.OrderBy(s => s.LastName);
                     break;
             }
-            int pageSize = 50; 
-            int pageNumber = (page ?? 1); 
+            int pageSize = 50;
+            int pageNumber = (page ?? 1);
             return View(students.ToPagedList(pageNumber, pageSize));
         }
 
@@ -101,7 +104,7 @@ namespace STIUApp.Controllers
             var AllCourses = db.Courses.ToList();
             var SelectedCourses = new List<Course>();
 
-            
+
 
             foreach (var course in AllCourses)
             {
@@ -111,7 +114,7 @@ namespace STIUApp.Controllers
                 }
             }
 
-           return SelectedCourses;
+            return SelectedCourses;
         }
 
         // GET: Student/Create
@@ -124,17 +127,62 @@ namespace STIUApp.Controllers
             return View();
         }
 
+        //Maya: add student enrollments
+
         // POST: Student/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StudentID,FirstName,LastName,Major")] Student student)
+        public ActionResult Create([Bind(Include = "StudentID,FirstName,LastName,Major,Minor")] Student student)
         {
             if (ModelState.IsValid)
             {
                 db.Students.Add(student);
                 db.SaveChanges();
+
+                //Check new student major
+                if (student.Major == "IT")
+                {
+                    //Create a new enrollment List with some enrollment data for IT Major
+                    var enrollments = new List<Enrollment> 
+                    {
+                         //Add the enrollments for an IT student
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE101", Taken = false, Status = "Not Taken"},
+                    };
+
+                    enrollments.ForEach(s => db.Enrollments.Add(s));
+                    db.SaveChanges();
+                }
+
+                //Check student minor
+                if (student.Minor == "CMD")
+                {
+                    var enrollments = new List<Enrollment>
+                    {
+                        //Add enrollments to cmd coursers
+                         new Enrollment{StudentID = student.StudentID, CourseID="CMD201", Taken = false, Status = "Not Taken"},
+
+                    };
+                    enrollments.ForEach(s => db.Enrollments.Add(s));
+                    db.SaveChanges();
+                }
+
+                //Check student minor
+                if (student.Minor == "MKT")
+                {
+                    var enrollments = new List<Enrollment>
+                    {
+                        //Add enrollments to marketing courses
+                         new Enrollment{StudentID = student.StudentID, CourseID="CMD213", Taken = false, Status = "Not Taken"},
+
+
+                    };
+                    enrollments.ForEach(s => db.Enrollments.Add(s));
+                    db.SaveChanges();
+                }
+
+
                 return RedirectToAction("Index");
             }
 
