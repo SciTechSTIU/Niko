@@ -95,7 +95,13 @@ namespace STIUApp.DAL
                 new Course{CourseID="PSY101", Title="General Psychology", Credits= 3 ,Faculty = "IT", Type="General Education"},
                 new Course{CourseID="PSY102", Title="Personlaity Development", Credits= 3 ,Faculty = "IT", Type="General Education"},
                 new Course{CourseID="SOC101", Title="People and Scoiety", Credits= 3 ,Faculty = "IT", Type="General Education"},
-            
+                new Course{CourseID="SOC102", Title="Drug and Society", Credits= 3, Faculty="IT", Type="General Education"},
+                new Course{CourseID="SOC103", Title="Sports and Society", Credits= 3,Faculty="IT", Type="General Education"},
+                new Course{CourseID="POL103", Title="Thai Government and Politics", Credits= 3, Faculty="IT", Type="General Education"},
+                new Course{CourseID="SOC104", Title="Comparative World Religions", Credits= 3, Faculty="IT", Type="General Education"},
+                new Course{CourseID="SOC105", Title="ASEAN Studies", Credits= 3, Faculty="IT", Type="General Education"},
+                new Course{CourseID="BUS299", Title="Professional Lecuture", Credits = 1, Faculty="IT", Prereq ="ENG103",Type="General Education"},
+                new Course{CourseID="LIB299", Title="Social Service", Credits= 1, Faculty="IT", Prereq="ENG103",Type="General Education"},
             };
 
             courses.ForEach(s => context.Courses.Add(s));
