@@ -73,8 +73,28 @@ namespace STIUApp.DAL
                 new Course{CourseID="ITE452", Title="Big Data", Credits= 3, Prereq="ITE442, ITE475" ,Faculty = "IT", Type="Major Elective"},
                 new Course{CourseID="ITE480", Title="Special Project", Credits= 3,Faculty = "IT", Type="Major Elective"},
                 new Course{CourseID="ITE485", Title="System and Network Administration", Credits= 3, Prereq="ITE475" ,Faculty = "IT", Type="Major Elective"},
-                            
-            
+                new Course{CourseID="ENG101", Title="English 1", Credits= 3, Faculty = "IT", Type="General Education"},            
+                new Course{CourseID="ENG102", Title="English 2", Credits= 3, Prereq="ENG101" ,Faculty = "IT", Type="General Education"},
+                new Course{CourseID="ENG103", Title="English 3", Credits= 3, Prereq="ENG102" ,Faculty = "IT", Type="General Education"},
+                new Course{CourseID="MAT102", Title="Quantitative Methods for Business", Credits= 3, Prereq="MAT101 or Placement test" ,Faculty = "IT", Type="General Education"},
+                new Course{CourseID="STA101", Title="Introduction to Statistics", Credits= 3, Faculty = "IT", Type="General Education"},
+                new Course{CourseID="SCI105", Title="Environmetal Science", Credits= 3, Faculty = "IT", Type="General Education"},
+                new Course{CourseID="MIS103", Title="Computer Application", Credits= 3, Faculty = "IT", Type="General Education"},
+                new Course{CourseID="ART101", Title="Art Appreciation", Credits= 3, Faculty = "IT", Type="General Education"},
+                new Course{CourseID="GEO101", Title="World Geography", Credits= 3, Faculty = "IT", Type="General Education"},
+                new Course{CourseID="HIS101", Title="Thailand in Global Perspective", Credits= 3, Faculty = "IT", Type="General Education"},
+                new Course{CourseID="THA101", Title="Thai Language", Credits= 3 ,Faculty = "IT", Type="General Education"},
+                new Course{CourseID="HIS102", Title="The Eastern And Western Worlds in Contemporary Perspective", Credits= 3 ,Faculty = "IT", Type="General Education"},
+                new Course{CourseID="HIS103", Title="Asia in Global Perspective", Credits= 3 ,Faculty = "IT", Type="General Education"},
+                new Course{CourseID="HIS104", Title="Foundation of Western Civilization ", Credits= 3 ,Faculty = "IT", Type="General Education"},
+                new Course{CourseID="MUS101", Title="Music of Wolrd Culuture", Credits= 3 ,Faculty = "IT", Type="General Education"}, 
+                new Course{CourseID="PHI101", Title="Introduction to Western Philosophy" ,Credits= 3 ,Faculty = "IT", Type="General Education"},
+                new Course{CourseID="ATH101", Title="Introduction to Cultural Anthropology", Credits= 3 ,Faculty = "IT", Type="General Education"},
+                new Course{CourseID="ECO101", Title="Sufficiency Economy", Credits= 3 ,Faculty = "IT", Type="General Education"},
+                new Course{CourseID="POL104", Title="International Human Right", Credits= 3 ,Faculty = "IT", Type="General Education"},
+                new Course{CourseID="PSY101", Title="General Psychology", Credits= 3 ,Faculty = "IT", Type="General Education"},
+                new Course{CourseID="PSY102", Title="Personlaity Development", Credits= 3 ,Faculty = "IT", Type="General Education"},
+                new Course{CourseID="SOC101", Title="People and Scoiety", Credits= 3 ,Faculty = "IT", Type="General Education"},
             
             };
 
