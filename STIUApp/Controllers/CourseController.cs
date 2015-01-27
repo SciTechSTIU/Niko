@@ -59,6 +59,9 @@ namespace STIUApp.Controllers
 
             switch (sortOrder)
             {
+                case "Course_ID":
+                    courses = courses.OrderBy(s => s.CourseID);
+                    break;
                 case "Completed":
                     courses = courses.OrderBy(s => s.Completed);
                     break;
