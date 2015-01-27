@@ -231,18 +231,5 @@ namespace STIUApp.Controllers
             }
             base.Dispose(disposing);
         }
-
-        // GET: Course/credit
-        public ActionResult creditnumber()
-        {
-            List<int> number = new List<int>();
-           number.Add(1);
-           number.Add(3);
-           number.Add(6);
-           SelectList credit = new SelectList(number);
-           ViewData["credit"] = credit;
-           return View();
-
-        }
     }
 }
