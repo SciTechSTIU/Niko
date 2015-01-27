@@ -102,6 +102,25 @@ namespace STIUApp.DAL
                 new Course{CourseID="SOC105", Title="ASEAN Studies", Credits= 3, Faculty="IT", Type="General Education"},
                 new Course{CourseID="BUS299", Title="Professional Lecuture", Credits = 1, Faculty="IT", Prereq ="ENG103",Type="General Education"},
                 new Course{CourseID="LIB299", Title="Social Service", Credits= 1, Faculty="IT", Prereq="ENG103",Type="General Education"},
+                new Course{CourseID="MKT213", Title="Principle of Marketing", Credits= 3, Faculty="IT", Type="Digital Marketing Minors"},
+                new Course{CourseID="MKT333", Title="Digital Marketing", Credits= 3, Prereq="MKT213", Faculty="IT", Type="Digital Marketing Minor"},
+                new Course{CourseID="MKT345", Title="Gamification", Credits=3, Prereq="MKT213", Faculty="IT", Type="Digital Marketing Minor"},
+                new Course{CourseID="MKT451", Title="Quantitative Analysis for Marketing", Credits=3, Prereq="MKT213", Faculty="IT", Type="Digital Marketing Minor"},
+                new Course{CourseID="MKT470", Title="Media Planning and Buying", Credits= 3, Prereq ="MKT213", Faculty="IT", Type="Digital Marketing Minor"},
+                new Course{CourseID="CMD201", Title="Grafic Design 1", Credits = 3, Faculty="IT", Type="Creative Media Design Minor"},
+                new Course{CourseID="CMD202", Title="Grafic Design 2", Credits = 3, Faculty="IT", Type="Creative Media Design Minor"},
+                new Course{CourseID="CMD211", Title="Page Layout 1", Credits = 3, Faculty="IT",Type="Creative Media Design Minor"},
+                new Course{CourseID="CMD221", Title="Typography 1", Credits = 3, Faculty="IT",Type="Creative Media Design Minor"},
+                new Course{CourseID="CMD303", Title="User Experience", Credits= 3, Faculty="IT", Type="Creative Media Design Minor"},
+            
+            
+            
+            
+            
+            
+            
+            
+            
             };
 
             courses.ForEach(s => context.Courses.Add(s));
