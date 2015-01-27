@@ -24,6 +24,17 @@ namespace STIUApp.Models
         public int Enrolled { get; set; }
         public int NotTaken { get; set; }
 
+        public enum Creditnumber
+        {
+            [Description("1")]
+            1,
+            [Description("3")]
+            3，
+            [Description("6")]
+            6
+        }
+
+        public Creditnumber number {get; set;}
 
         //Course entity can be related to any number of Enrollment entities
         public virtual ICollection<Enrollment> Enrollments { get; set; }
