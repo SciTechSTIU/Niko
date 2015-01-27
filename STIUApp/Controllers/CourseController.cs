@@ -97,24 +97,25 @@ namespace STIUApp.Controllers
 
         public void UpdateCourseEnrolled(SchoolContext db)
         {
-
+            //Get list of all the courses
             ICollection<Course> AllCourses = db.Courses.ToList();
             int c=0, e=0, nt=0;
 
             try
             {
-                foreach (var item in AllCourses)
+                //For every course get the number of enrolled from the enrollments entities 
+                foreach (var course in AllCourses)
                 {
-                    c = item.Enrollments.Count(s => s.Status == "Completed");
-                    item.Completed = c;
+                    c = course.Enrollments.Count(s => s.Status == "Completed");
+                    course.Completed = c;
                     db.SaveChanges();
 
-                    e = item.Enrollments.Count(s => s.Status == "Enrolled");
-                    item.Enrolled = e;
+                    e = course.Enrollments.Count(s => s.Status == "Enrolled");
+                    course.Enrolled = e;
                     db.SaveChanges();
 
-                    nt = item.Enrollments.Count(s => s.Status == "Not Taken");
-                    item.NotTaken = nt;
+                    nt = course.Enrollments.Count(s => s.Status == "Not Taken");
+                    course.NotTaken = nt;
                     db.SaveChanges();
                 } 
             } 

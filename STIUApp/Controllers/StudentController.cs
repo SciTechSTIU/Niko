@@ -69,6 +69,8 @@ namespace STIUApp.Controllers
             return View(students.ToPagedList(pageNumber, pageSize));
         }
 
+
+
         // GET: Student/Details/5
         public ActionResult Details(int? StudentID)
         {
@@ -81,12 +83,44 @@ namespace STIUApp.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.BCList = GetCourseList("Basic Core");
+            ViewBag.MRList = GetCourseList("Major Requisite");
+            ViewBag.MEList = GetCourseList("Major Elective");
+
             return View(student);
+        }
+
+        //Get courses of a certain type ie. Basic Core
+        public List<Course> GetCourseList(string CourseType)
+        {
+
+            var students = from s in db.Students
+                           select s;
+
+            var AllCourses = db.Courses.ToList();
+            var SelectedCourses = new List<Course>();
+
+            
+
+            foreach (var course in AllCourses)
+            {
+                if (course.Type == CourseType)
+                {
+                    SelectedCourses.Add(course);
+                }
+            }
+
+           return SelectedCourses;
         }
 
         // GET: Student/Create
         public ActionResult Create()
         {
+            ViewBag.BCList = GetCourseList("Basic Core");
+            ViewBag.MRList = GetCourseList("Major Requisite");
+            ViewBag.MEList = GetCourseList("Major Elective");
+
             return View();
         }
 
