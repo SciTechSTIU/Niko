@@ -149,6 +149,42 @@ namespace STIUApp.Controllers
                     {
                          //Add the enrollments for an IT student
                          new Enrollment{StudentID = student.StudentID, CourseID="ITE101", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE221", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE222", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE120", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="BUS206", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ENG223", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE201", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE231", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE235", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="LIB213", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="LIB214", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="SCI111", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE220", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE254", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE321", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE337", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE420", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE442", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE475", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE479", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE299", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE499", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE240", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE340", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE342", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE343", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE351", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE353", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE390", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE443", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE445", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE448", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE449", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE451", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE452", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE480", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE485", Taken = false, Status = "Not Taken"}.
                     };
 
                     enrollments.ForEach(s => db.Enrollments.Add(s));
@@ -162,7 +198,10 @@ namespace STIUApp.Controllers
                     {
                         //Add enrollments to cmd coursers
                          new Enrollment{StudentID = student.StudentID, CourseID="CMD201", Taken = false, Status = "Not Taken"},
-
+                         new Enrollment{StudentID = student.StudentID, CourseID="CMD202", Taken = false, Status ="Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="CMD211", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="CMD221", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="CMD303", Taken = false, Status = "Not Taken" },
                     };
                     enrollments.ForEach(s => db.Enrollments.Add(s));
                     db.SaveChanges();
@@ -174,7 +213,11 @@ namespace STIUApp.Controllers
                     var enrollments = new List<Enrollment>
                     {
                         //Add enrollments to marketing courses
-                         new Enrollment{StudentID = student.StudentID, CourseID="CMD213", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="MKT213", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="MKT333", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="MKT345", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="MKT451", Taken = false, Status = "Not Taken"},
+                         new Enrollment{StudentID = student.StudentID, CourseID="MKT470", Taken = false, Status = "Not Taken"},
 
 
                     };
