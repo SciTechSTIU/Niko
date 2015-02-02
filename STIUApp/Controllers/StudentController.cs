@@ -184,7 +184,7 @@ namespace STIUApp.Controllers
                          new Enrollment{StudentID = student.StudentID, CourseID="ITE451", Taken = false, Status = "Not Taken"},
                          new Enrollment{StudentID = student.StudentID, CourseID="ITE452", Taken = false, Status = "Not Taken"},
                          new Enrollment{StudentID = student.StudentID, CourseID="ITE480", Taken = false, Status = "Not Taken"},
-                         new Enrollment{StudentID = student.StudentID, CourseID="ITE485", Taken = false, Status = "Not Taken"}.
+                         new Enrollment{StudentID = student.StudentID, CourseID="ITE485", Taken = false, Status = "Not Taken"},
                     };
 
                     enrollments.ForEach(s => db.Enrollments.Add(s));
