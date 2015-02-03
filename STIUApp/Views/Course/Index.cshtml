@@ -70,13 +70,13 @@
             @Html.DisplayFor(modelItem => item.Credits)
         </td>
         <td>
-            @item.Enrollments.Count(s => s.Status == "Completed").ToString();
+            @Html.DisplayFor(modelItem => item.Completed)
         </td>
         <td>
-            @item.Enrollments.Count(s => s.Status == "Enrolled").ToString()
+            @Html.DisplayFor(modelItem => item.Enrolled)
         </td>
         <td>
-            @item.Enrollments.Count(s => s.Status == "Not Taken").ToString()
+            @Html.DisplayFor(modelItem => item.NotTaken)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Faculty)
