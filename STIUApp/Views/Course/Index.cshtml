@@ -71,7 +71,7 @@
         </td>
         <td>
             @if (item.Enrollments.Count != null) { 
-            item.Enrollments.Count(s => s.Status == "Completed").ToString()
+            @item.Enrollments.Count(s => s.Status == "Completed").ToString()
             }
             else{
                 <span>0</span>
