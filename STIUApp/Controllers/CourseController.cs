@@ -106,17 +106,20 @@ namespace STIUApp.Controllers
                 //For every course get the number of enrolled from the enrollments entities 
                 foreach (var course in AllCourses)
                 {
-                    c = course.Enrollments.Count(s => s.Status == "Completed");
-                    course.Completed = c;
-                    db.SaveChanges();
+                    if (course.Enrollments.Count != null)
+                    {
+                        c = course.Enrollments.Count(s => s.Status == "Completed");
+                        course.Completed = c;
+                        db.SaveChanges();
 
-                    e = course.Enrollments.Count(s => s.Status == "Enrolled");
-                    course.Enrolled = e;
-                    db.SaveChanges();
+                        e = course.Enrollments.Count(s => s.Status == "Enrolled");
+                        course.Enrolled = e;
+                        db.SaveChanges();
 
-                    nt = course.Enrollments.Count(s => s.Status == "Not Taken");
-                    course.NotTaken = nt;
-                    db.SaveChanges();
+                        nt = course.Enrollments.Count(s => s.Status == "Not Taken");
+                        course.NotTaken = nt;
+                        db.SaveChanges();
+                    }
                 } 
             } 
 
