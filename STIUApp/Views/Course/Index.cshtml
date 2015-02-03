@@ -70,12 +70,7 @@
             @Html.DisplayFor(modelItem => item.Credits)
         </td>
         <td>
-            @if (item.Enrollments.Count != null) {
-                item.Enrollments.Count(s => s.Status == "Completed").ToString();
-            }
-            else{
-                <span>0</span>
-            }
+            @item.Enrollments.Count(s => s.Status == "Completed").ToString();
         </td>
         <td>
             @item.Enrollments.Count(s => s.Status == "Enrolled").ToString()
