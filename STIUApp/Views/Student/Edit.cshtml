@@ -76,14 +76,12 @@
                                 @Html.DisplayFor(modelItem => item.Course.Credits)
                             </td>
                             <td>
-                                @if (item.status == "Completed") { 
-                             
-                                @Html.DisplayFor(modelItem => item.Status)
-                                    }
+                                @Html.DisplayFor(modelItem => item.Status)                 
                             </td>
                                     
                                 
                         </tr>
+                        }
                     }
                 </table>
             </div>
@@ -291,6 +289,7 @@
         </div>
     </div>
 }
+}
 
 <div>
     @Html.ActionLink("Back to List", "Index")
@@ -299,4 +298,4 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-                    }
+                   
