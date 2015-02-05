@@ -64,7 +64,7 @@
 
                     @foreach (var item in Model.Enrollments)
                     {
-                        @if(item.Type == "Basic Core"){
+                        if(item.Type == "Basic Core"){
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.CourseID )
