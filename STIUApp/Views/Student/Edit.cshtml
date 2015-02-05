@@ -61,28 +61,21 @@
                         <th>Enrolled</th>
                         <th>Not Taken</th>
                     </tr>
-
+                    
                     @foreach (var item in Model.Enrollments)
                     {
-                        if(item.Type == "Basic Core"){
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CourseID )
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem =>item.Course.Title)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Course.Credits)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Status)                 
-                            </td>
-                                    
-                                
+                            
+                            <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
+                            <td> @Html.DisplayFor(modelItem => item.sCourse.Title) </td>
+                            <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
+                            <td> @Html.DisplayFor(modelItem => item.Taken) </td>
+
                         </tr>
-                        }
-                    }
+                 
+                    } 
+                    
+                    
                 </table>
             </div>
         </div>
