@@ -134,7 +134,7 @@ namespace STIUApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StudentID,FirstName,LastName,Major,Minor")] Student student)
+        public ActionResult Create([Bind(Include = "StudentID,FirstName,LastName,Major,Minor,Type")] Student student)
         {
             if (ModelState.IsValid)
             {
