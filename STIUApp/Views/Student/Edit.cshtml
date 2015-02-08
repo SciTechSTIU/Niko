@@ -64,15 +64,14 @@
                     
                     @foreach (var item in Model.Enrollments)
                     {
+                         
                         <tr>
-                            
                             <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
                             <td> @Html.DisplayFor(modelItem => item.sCourse.Title) </td>
                             <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
                             <td> @Html.DisplayFor(modelItem => item.Taken) </td>
 
                         </tr>
-                 
                     } 
                     
                     
