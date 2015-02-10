@@ -82,37 +82,42 @@ namespace STIUApp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Student student = db.Students.Find(StudentID);
+            //var BCList = new List<Student>();
+            //BCList = from enrollment in student.Enrollments where enrollment == "Basic Core" select enrollment;
+
             if (student == null)
             {
                 return HttpNotFound();
             }
 
-            ViewBag.BCList = GetCourseList("Basic Core");
-            ViewBag.MRList = GetCourseList("Major Requisite");
-            ViewBag.MEList = GetCourseList("Major Elective");
-
             return View(student);
         }
 
+
+
         //Get courses of a certain type ie. Basic Core
-        public List<Course> GetCourseList(string CourseType)
+        public List<Course> GetCourseList(string CourseType, int? StudentID)
         {
 
             var students = from s in db.Students
                            select s;
 
-            var AllCourses = db.Courses.ToList();
+            Student student = db.Students.Find(StudentID);
+
+            var AllCourses = student.Enrollments.ToList();
+
+            //var AllCourses = db.Courses.ToList();
             var SelectedCourses = new List<Course>();
 
+            //foreach(var course in AllCourses.Where(student.Enrollments.))
 
-
-            foreach (var course in AllCourses)
-            {
-                if (course.Type == CourseType)
-                {
-                    SelectedCourses.Add(course);
-                }
-            }
+            //foreach (var course in AllCourses)
+            //{
+            //    if (course.Type.Contains(CourseType))
+            //    {
+            //        SelectedCourses.Add(course);
+            //    }
+            //}
 
             return SelectedCourses;
         }
@@ -120,9 +125,7 @@ namespace STIUApp.Controllers
         // GET: Student/Create
         public ActionResult Create()
         {
-            ViewBag.BCList = GetCourseList("Basic Core");
-            ViewBag.MRList = GetCourseList("Major Requisite");
-            ViewBag.MEList = GetCourseList("Major Elective");
+            
 
             return View();
         }

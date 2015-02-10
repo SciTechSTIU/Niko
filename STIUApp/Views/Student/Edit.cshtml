@@ -63,10 +63,9 @@
                     <tr>
                         <th>Course Code</th>
                         <th>Course Name</th>
-                        <th>Course Credits</th>
-                        <th>Completed</th>
-                        <th>Enrolled</th>
-                        <th>Not Taken</th>
+                        <th>Course Type</th>
+                        <th>Status</th>
+
                     </tr>
 
                     @*@foreach (var item in ViewBag.BCList)
@@ -105,22 +104,24 @@
                             <tr>
                                 <th>Course Code</th>
                                 <th>Course Name</th>
-                                <th>Course Credits</th>
-                                <th>Completed</th>
-                                <th>Enrolled</th>
-                                <th>Not Taken</th>
+                                <th>Course Type</th>
+                                <th>Status</th>
+
                             </tr>
 
-                            @foreach (var item in Model.Enrollments)
-                    {
-                                <tr>
-                                    <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
-                                    <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
-                                    <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
-                                    <td> @Html.DisplayFor(modelItem => item.Taken) </td>
+@foreach (var item in Model.Enrollments)
+{
 
-                                </tr>
-                    }
+    if (item.Course != null && item.Course.Type == "Basic Core")
+    {
+        <tr>
+            <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
+            <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
+            <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
+            <td> @Html.DisplayFor(modelItem => item.Status) </td>
+        </tr>
+    }                              
+}
 
 
                         </table>
@@ -134,35 +135,26 @@
                             <tr>
                                 <th>Course Code</th>
                                 <th>Course Name</th>
-                                <th>Course Credits</th>
-                                <th>Completed</th>
-                                <th>Enrolled</th>
-                                <th>Not Taken</th>
+                                <th>Course Type</th>
+                                <th>Status</th>
+
                             </tr>
 
-                            @*@foreach (var item in ViewBag.BCList)
+                            @foreach (var item in Model.Enrollments)
+                            {
+
+                                if (item.Course != null && item.Course.Type == "Major Requisite")
                                 {
                                     <tr>
-                                        <td>
-                                            @item.CourseID
-                                        </td>
-                                        <td>
-                                            @item.Title
-                                        </td>
-                                        <td>
-                                            @item.Credits
-                                        </td>
-                                        <td>
-
-                                        </td>
-                                        <td>
-
-                                        </td>
-                                        <td>
-
-                                        </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Status) </td>
                                     </tr>
-                                }*@
+                                }
+                            }
+
+
                         </table>
                     </div>
                 </div>
@@ -173,35 +165,26 @@
                             <tr>
                                 <th>Course Code</th>
                                 <th>Course Name</th>
-                                <th>Course Credits</th>
-                                <th>Completed</th>
-                                <th>Enrolled</th>
-                                <th>Not Taken</th>
+                                <th>Course Type</th>
+                                <th>Status</th>
+
                             </tr>
 
-                            @*@foreach (var item in ViewBag.BCList)
+                            @foreach (var item in Model.Enrollments)
+                            {
+
+                                if (item.Course != null && item.Course.Type == "Major Elective")
                                 {
                                     <tr>
-                                        <td>
-                                            @item.CourseID
-                                        </td>
-                                        <td>
-                                            @item.Title
-                                        </td>
-                                        <td>
-                                            @item.Credits
-                                        </td>
-                                        <td>
-
-                                        </td>
-                                        <td>
-
-                                        </td>
-                                        <td>
-
-                                        </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Status) </td>
                                     </tr>
-                                }*@
+                                }
+                            }
+
+
                         </table>
                     </div>
                 </div>
@@ -212,35 +195,26 @@
                             <tr>
                                 <th>Course Code</th>
                                 <th>Course Name</th>
-                                <th>Course Credits</th>
-                                <th>Completed</th>
-                                <th>Enrolled</th>
-                                <th>Not Taken</th>
+                                <th>Course Type</th>
+                                <th>Status</th>
+
                             </tr>
 
-                            @*@foreach (var item in ViewBag.BCList)
+                            @foreach (var item in Model.Enrollments)
+                            {
+
+                                if (item.Course != null && item.Course.Type == "Internship")
                                 {
                                     <tr>
-                                        <td>
-                                            @item.CourseID
-                                        </td>
-                                        <td>
-                                            @item.Title
-                                        </td>
-                                        <td>
-                                            @item.Credits
-                                        </td>
-                                        <td>
-
-                                        </td>
-                                        <td>
-
-                                        </td>
-                                        <td>
-
-                                        </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Status) </td>
                                     </tr>
-                                }*@
+                                }
+                            }
+
+
                         </table>
                     </div>
                 </div>
@@ -251,35 +225,26 @@
                             <tr>
                                 <th>Course Code</th>
                                 <th>Course Name</th>
-                                <th>Course Credits</th>
-                                <th>Completed</th>
-                                <th>Enrolled</th>
-                                <th>Not Taken</th>
+                                <th>Course Type</th>
+                                <th>Status</th>
+
                             </tr>
 
-                            @*@foreach (var item in ViewBag.BCList)
+                            @foreach (var item in Model.Enrollments)
+                            {
+
+                                if (item.Course != null && item.Course.Type == "CMD")
                                 {
                                     <tr>
-                                        <td>
-                                            @item.CourseID
-                                        </td>
-                                        <td>
-                                            @item.Title
-                                        </td>
-                                        <td>
-                                            @item.Credits
-                                        </td>
-                                        <td>
-
-                                        </td>
-                                        <td>
-
-                                        </td>
-                                        <td>
-
-                                        </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Status) </td>
                                     </tr>
-                                }*@
+                                }
+                            }
+
+
                         </table>
                     </div>
                 </div>
@@ -290,35 +255,26 @@
                             <tr>
                                 <th>Course Code</th>
                                 <th>Course Name</th>
-                                <th>Course Credits</th>
-                                <th>Completed</th>
-                                <th>Enrolled</th>
-                                <th>Not Taken</th>
+                                <th>Course Type</th>
+                                <th>Status</th>
+
                             </tr>
 
-                            @*@foreach (var item in ViewBag.BCList)
+                            @foreach (var item in Model.Enrollments)
+                            {
+
+                                if (item.Course != null && item.Course.Type == "MKT")
                                 {
                                     <tr>
-                                        <td>
-                                            @item.CourseID
-                                        </td>
-                                        <td>
-                                            @item.Title
-                                        </td>
-                                        <td>
-                                            @item.Credits
-                                        </td>
-                                        <td>
-
-                                        </td>
-                                        <td>
-
-                                        </td>
-                                        <td>
-
-                                        </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Status) </td>
                                     </tr>
-                                }*@
+                                }
+                            }
+
+
                         </table>
                     </div>
                 </div>
