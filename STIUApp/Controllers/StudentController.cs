@@ -82,8 +82,7 @@ namespace STIUApp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Student student = db.Students.Find(StudentID);
-            //var BCList = new List<Student>();
-            //BCList = from enrollment in student.Enrollments where enrollment == "Basic Core" select enrollment;
+           
 
             if (student == null)
             {
@@ -93,34 +92,6 @@ namespace STIUApp.Controllers
             return View(student);
         }
 
-
-
-        //Get courses of a certain type ie. Basic Core
-        public List<Course> GetCourseList(string CourseType, int? StudentID)
-        {
-
-            var students = from s in db.Students
-                           select s;
-
-            Student student = db.Students.Find(StudentID);
-
-            var AllCourses = student.Enrollments.ToList();
-
-            //var AllCourses = db.Courses.ToList();
-            var SelectedCourses = new List<Course>();
-
-            //foreach(var course in AllCourses.Where(student.Enrollments.))
-
-            //foreach (var course in AllCourses)
-            //{
-            //    if (course.Type.Contains(CourseType))
-            //    {
-            //        SelectedCourses.Add(course);
-            //    }
-            //}
-
-            return SelectedCourses;
-        }
 
         // GET: Student/Create
         public ActionResult Create()
@@ -257,16 +228,132 @@ namespace STIUApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,StudentID,FirstName,LastName,Major")] Student student)
+        public ActionResult Edit([Bind(Include = "ID,StudentID,FirstName,LastName,Major,Minor,Enrollments, Status")] Student student, Enrollment enrollment, string CourseID, int? StudentID, string Status)
         {
+            
             if (ModelState.IsValid)
             {
+
+                
+
                 db.Entry(student).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                UpdateEnrollment(CourseID, student.StudentID, Status);
+
+                //var enrollmentsToUpdate = db.Enrollments.Where(i => i.StudentID == student.StudentID);
+
+                //foreach (var item in enrollmentsToUpdate)
+                //{
+                //    if (item.StudentID == student.StudentID)
+                //    {
+                //        db.Entry(student).State = EntityState.Modified;
+                //        db.SaveChanges();
+                //    }
+                //}
+
+
+
+                //var enrollmentUpdate = db.Enrollments.Include(i => i.Course.Enrollments).Where(i => i.StudentID == student.StudentID);
+
+                //db.Entry(enrollmentUpdate).State = EntityState.Modified;
+                //db.SaveChanges();
+
+
+                //foreach(var item in enrollmentUpdate) {
+                //    db.Entry(enrollment).State = EntityState.Modified;
+                //    db.SaveChanges();
+                //} 
+
+                return RedirectToAction("Edit", "Student", new { StudentID = student.StudentID });
             }
             return View(student);
         }
+
+
+
+
+
+
+
+
+
+
+
+        [HttpPost]
+        public ActionResult UpdateEnrollment(string CourseID, int StudentID, string Status)
+        {
+
+
+            Student student = db.Students.Find(StudentID);
+
+           if (student.Enrollments != null)
+           {
+
+                foreach (var item in student.Enrollments)
+                {
+                //var enrollments = new List<Enrollment>(db.Enrollments.Where(i => i.StudentID == student.StudentID));
+                //var en2 = student.Enrollments.ToList();
+
+                    if (item != null && item.CourseID == CourseID)
+                    {
+                    //ModelState.Remove("Status");
+                    
+                        item.Status = Status;
+                        db.Entry(item).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                }
+           }
+
+           return RedirectToAction("Edit", "Student", new { StudentID = StudentID });
+
+           //RedirectToRoute("Student/Edit", new { StudentID = StudentID });
+        }
+
+
+
+
+
+
+
+        //public void UpdateEnrollments(string[] enrollmentlist, Student student) 
+        //{
+        //    var changedEnrollments = new HashSet<string>(enrollmentlist);
+        //    var studentEnrollments = new HashSet<int>(student.Enrollments.Select(c => c.EnrollmentID));
+
+        //    var studentToUpdate = student;
+
+
+        //    foreach (var enrollment in db.Enrollments)
+        //    {
+        //        if (studentEnrollments.Contains(enrollment.EnrollmentID))
+        //        {
+
+        //        }
+        //    }
+        //}
+
+
+
+        //public void UpdateEnrolledCourses(string[] enrollmentlist, Student studentToUpdate)
+        //{
+        //    var selectedCoursesHS = new HashSet<string>(enrollmentlist);
+        //    var studentCourses = new HashSet<int>
+        //        (studentToUpdate.Enrollments.Select(c => c.EnrollmentID));
+
+        //    foreach (var enrollment in db.Enrollments)
+        //    {
+        //        if (selectedCoursesHS.Contains(enrollment.CourseID))
+        //        {
+                    
+        //        }
+        //    }
+
+        //} 
+
+
+
 
         // GET: Student/Delete/5
         public ActionResult Delete(int? StudentID)

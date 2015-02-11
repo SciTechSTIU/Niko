@@ -57,6 +57,17 @@
         </div>
 
         <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save Student Info" class="btn btn-default" />
+            </div>
+        </div>
+
+
+            </div>
+
+    <div class="form-horizontal">
+
+        <div class="form-group">
             <div class="col-md-10">
                 <h3>General Education</h3>
                 <table class="table">
@@ -68,223 +79,501 @@
 
                     </tr>
 
-                    @*@foreach (var item in ViewBag.BCList)
+                                        @foreach (var item in Model.Enrollments)
+                    {
+
+                        if (item.Course != null && item.Course.Type == "General Education")
+                        {
+                            if (item.Status == "Completed") { 
+                                @:<tr style="background-color:forestgreen">
+                        }
+
+                               <tr> 
+
+                                <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
+                                <td>
+                                    @{
+                            List<SelectListItem> listItems = new List<SelectListItem>();
+                            if (item.Status == "Completed")
+                            {
+                                listItems.Add(new SelectListItem { Text = "Completed", Value = "Completed", Selected = true });
+                            }
+                            else
+                            {
+                                listItems.Add(new SelectListItem { Text = "Completed", Value = "Completed" });
+                            }
+
+                            if (item.Status == "Enrolled")
+                            {
+                                listItems.Add(new SelectListItem { Text = "Enrolled", Value = "Enrolled", Selected = true });
+                            }
+                            else
+                            {
+                                listItems.Add(new SelectListItem { Text = "Enrolled", Value = "Enrolled" });
+                            }
+
+                            if (item.Status == "Not Taken")
+                            {
+                                listItems.Add(new SelectListItem { Text = "Not Taken", Value = "Not Taken", Selected = true });
+                            }
+                            else
+                            {
+                                listItems.Add(new SelectListItem { Text = "Not Taken", Value = "Not Taken" });
+                            }
+
+                                    }
+
+                                    @using (Html.BeginForm("UpdateEnrollment", "Student", FormMethod.Post, new { id = item.CourseID }))
+                                    {
+                                        @Html.Hidden("CourseID", item.CourseID)
+                                        @Html.Hidden("StudentID", item.StudentID)
+                                        @Html.DropDownList("Status", listItems, new { onchange = "this.form.submit();" })
+                                    }
+
+                                </td>
+                            </tr>
+                        }
+                    }
+
+
+                </table>
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <h3>Basic Core</h3>
+                <table class="table">
+                    <tr>
+                        <th>Course Code</th>
+                        <th>Course Name</th>
+                        <th>Course Type</th>
+                        <th>Status</th>
+
+                    </tr>
+
+                    @foreach (var item in Model.Enrollments)
+                    {
+
+                        if (item.Course != null && item.Course.Type == "Basic Core")
+                        {
+                            if (item.Status == "Completed")
+                            {
+                                @:<tr style="background-color:forestgreen">
+                        } <tr>
+                                <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
+                                <td>
+                            @{
+                            List<SelectListItem> listItems = new List<SelectListItem>();
+                            if (item.Status == "Completed")
+                            {
+                                listItems.Add(new SelectListItem { Text = "Completed", Value = "Completed", Selected = true });
+                            }
+                            else
+                            {
+                                listItems.Add(new SelectListItem { Text = "Completed", Value = "Completed" });
+                            }
+
+                            if (item.Status == "Enrolled")
+                            {
+                                listItems.Add(new SelectListItem { Text = "Enrolled", Value = "Enrolled", Selected = true });
+                            }
+                            else
+                            {
+                                listItems.Add(new SelectListItem { Text = "Enrolled", Value = "Enrolled" });
+                            }
+
+                            if (item.Status == "Not Taken")
+                            {
+                                listItems.Add(new SelectListItem { Text = "Not Taken", Value = "Not Taken", Selected = true });
+                            }
+                            else
+                            {
+                                listItems.Add(new SelectListItem { Text = "Not Taken", Value = "Not Taken" });
+                            }
+
+                            }
+
+                                    @using (Html.BeginForm("UpdateEnrollment", "Student", FormMethod.Post, new { id = item.CourseID }))
+                                    {
+                                        @Html.Hidden("CourseID", item.CourseID)
+                                        @Html.Hidden("StudentID", item.StudentID)
+                                        @Html.DropDownList("Status", listItems, new { onchange = "this.form.submit();" })
+                                    }
+
+                                </td>
+                            </tr>
+                        }
+                    }
+
+
+                </table>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <h3>Major Requisite</h3>
+                <table class="table">
+                    <tr>
+                        <th>Course Code</th>
+                        <th>Course Name</th>
+                        <th>Course Type</th>
+                        <th>Status</th>
+
+                    </tr>
+
+                    @foreach (var item in Model.Enrollments)
+                    {
+
+                        if (item.Course != null && item.Course.Type == "Major Requisite")
                         {
                             <tr>
+                                <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
                                 <td>
-                                    @item.CourseID
-                                </td>
-                                <td>
-                                    @item.Title
-                                </td>
-                                <td>
-                                    @item.Credits
-                                </td>
-                                <td>
+                                    @{
+                            List<SelectListItem> listItems = new List<SelectListItem>();
+                            if (item.Status == "Completed")
+                            {
+                                listItems.Add(new SelectListItem { Text = "Completed", Value = "Completed", Selected = true });
+                            }
+                            else
+                            {
+                                listItems.Add(new SelectListItem { Text = "Completed", Value = "Completed" });
+                            }
 
-                                </td>
-                                <td>
+                            if (item.Status == "Enrolled")
+                            {
+                                listItems.Add(new SelectListItem { Text = "Enrolled", Value = "Enrolled", Selected = true });
+                            }
+                            else
+                            {
+                                listItems.Add(new SelectListItem { Text = "Enrolled", Value = "Enrolled" });
+                            }
 
-                                </td>
-                                <td>
+                            if (item.Status == "Not Taken")
+                            {
+                                listItems.Add(new SelectListItem { Text = "Not Taken", Value = "Not Taken", Selected = true });
+                            }
+                            else
+                            {
+                                listItems.Add(new SelectListItem { Text = "Not Taken", Value = "Not Taken" });
+                            }
+
+                                    }
+
+                                    @using (Html.BeginForm("UpdateEnrollment", "Student", FormMethod.Post, new { id = item.CourseID }))
+                                    {
+                                        @Html.Hidden("CourseID", item.CourseID)
+                                        @Html.Hidden("StudentID", item.StudentID)
+                                        @Html.DropDownList("Status", listItems, new { onchange = "this.form.submit();" })
+                                    }
 
                                 </td>
                             </tr>
-                        }*@
+                        }
+                    }
                 </table>
-                </div>
             </div>
+        </div>
 
 
+        <div class="form-group">
+            <div class="col-md-10">
+                <h3>Major Elective</h3>
+                <table class="table">
+                    <tr>
+                        <th>Course Code</th>
+                        <th>Course Name</th>
+                        <th>Course Type</th>
+                        <th>Status</th>
 
-                <div class="form-group">
-                    <div class="col-md-10">
-                        <h3>Basic Core</h3>
-                        <table class="table">
+                    </tr>
+
+                    @foreach (var item in Model.Enrollments)
+                    {
+
+                        if (item.Course != null && item.Course.Type == "Major Elective")
+                        {
                             <tr>
-                                <th>Course Code</th>
-                                <th>Course Name</th>
-                                <th>Course Type</th>
-                                <th>Status</th>
+                                <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
+                                <td>
+                                    @{
+                            List<SelectListItem> listItems = new List<SelectListItem>();
+                            if (item.Status == "Completed")
+                            {
+                                listItems.Add(new SelectListItem { Text = "Completed", Value = "Completed", Selected = true });
+                            }
+                            else
+                            {
+                                listItems.Add(new SelectListItem { Text = "Completed", Value = "Completed" });
+                            }
 
+                            if (item.Status == "Enrolled")
+                            {
+                                listItems.Add(new SelectListItem { Text = "Enrolled", Value = "Enrolled", Selected = true });
+                            }
+                            else
+                            {
+                                listItems.Add(new SelectListItem { Text = "Enrolled", Value = "Enrolled" });
+                            }
+
+                            if (item.Status == "Not Taken")
+                            {
+                                listItems.Add(new SelectListItem { Text = "Not Taken", Value = "Not Taken", Selected = true });
+                            }
+                            else
+                            {
+                                listItems.Add(new SelectListItem { Text = "Not Taken", Value = "Not Taken" });
+                            }
+
+                                    }
+
+                                    @using (Html.BeginForm("UpdateEnrollment", "Student", FormMethod.Post, new { id = item.CourseID }))
+                                    {
+                                        @Html.Hidden("CourseID", item.CourseID)
+                                        @Html.Hidden("StudentID", item.StudentID)
+                                        @Html.DropDownList("Status", listItems, new { onchange = "this.form.submit();" })
+                                    }
+
+                                </td>
                             </tr>
+                        }
+                    }
 
-@foreach (var item in Model.Enrollments)
-{
 
-    if (item.Course != null && item.Course.Type == "Basic Core")
-    {
-        <tr>
-            <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
-            <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
-            <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
-            <td> @Html.DisplayFor(modelItem => item.Status) </td>
-        </tr>
-    }                              
+                </table>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <h3>Internship</h3>
+                <table class="table">
+                    <tr>
+                        <th>Course Code</th>
+                        <th>Course Name</th>
+                        <th>Course Type</th>
+                        <th>Status</th>
+
+                    </tr>
+
+                    @foreach (var item in Model.Enrollments)
+                    {
+
+                        if (item.Course != null && item.Course.Type == "Internship")
+                        {
+                            <tr>
+                                <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
+                                <td>
+                                    @{
+                            List<SelectListItem> listItems = new List<SelectListItem>();
+                            if (item.Status == "Completed")
+                            {
+                                listItems.Add(new SelectListItem { Text = "Completed", Value = "Completed", Selected = true });
+                            }
+                            else
+                            {
+                                listItems.Add(new SelectListItem { Text = "Completed", Value = "Completed" });
+                            }
+
+                            if (item.Status == "Enrolled")
+                            {
+                                listItems.Add(new SelectListItem { Text = "Enrolled", Value = "Enrolled", Selected = true });
+                            }
+                            else
+                            {
+                                listItems.Add(new SelectListItem { Text = "Enrolled", Value = "Enrolled" });
+                            }
+
+                            if (item.Status == "Not Taken")
+                            {
+                                listItems.Add(new SelectListItem { Text = "Not Taken", Value = "Not Taken", Selected = true });
+                            }
+                            else
+                            {
+                                listItems.Add(new SelectListItem { Text = "Not Taken", Value = "Not Taken" });
+                            }
+
+                                    }
+
+                                    @using (Html.BeginForm("UpdateEnrollment", "Student", FormMethod.Post, new { id = item.CourseID }))
+                                    {
+                                        @Html.Hidden("CourseID", item.CourseID)
+                                        @Html.Hidden("StudentID", item.StudentID)
+                                        @Html.DropDownList("Status", listItems, new { onchange = "this.form.submit();" })
+                                    }
+
+                                </td>
+                            </tr>
+                        }
+                    }
+
+
+                </table>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <h3>Digital Marketing Minor</h3>
+                <table class="table">
+                    <tr>
+                        <th>Course Code</th>
+                        <th>Course Name</th>
+                        <th>Course Type</th>
+                        <th>Status</th>
+
+                    </tr>
+
+                    @foreach (var item in Model.Enrollments)
+                    {
+
+                        if (item.Course != null && item.Course.Type == "MKT")
+                        {
+                            <tr>
+                                <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
+                                <td>
+                                    @{
+                            List<SelectListItem> listItems = new List<SelectListItem>();
+                            if (item.Status == "Completed")
+                            {
+                                listItems.Add(new SelectListItem { Text = "Completed", Value = "Completed", Selected = true });
+                            }
+                            else
+                            {
+                                listItems.Add(new SelectListItem { Text = "Completed", Value = "Completed" });
+                            }
+
+                            if (item.Status == "Enrolled")
+                            {
+                                listItems.Add(new SelectListItem { Text = "Enrolled", Value = "Enrolled", Selected = true });
+                            }
+                            else
+                            {
+                                listItems.Add(new SelectListItem { Text = "Enrolled", Value = "Enrolled" });
+                            }
+
+                            if (item.Status == "Not Taken")
+                            {
+                                listItems.Add(new SelectListItem { Text = "Not Taken", Value = "Not Taken", Selected = true });
+                            }
+                            else
+                            {
+                                listItems.Add(new SelectListItem { Text = "Not Taken", Value = "Not Taken" });
+                            }
+
+                                    }
+
+                                    @using (Html.BeginForm("UpdateEnrollment", "Student", FormMethod.Post, new { id = item.CourseID }))
+                                    {
+                                        @Html.Hidden("CourseID", item.CourseID)
+                                        @Html.Hidden("StudentID", item.StudentID)
+                                        @Html.DropDownList("Status", listItems, new { onchange = "this.form.submit();" })
+                                    }
+
+                                </td>
+                            </tr>
+                        }
+                    }
+
+
+                </table>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <h3>Creative Media Design Minor</h3>
+                <table class="table">
+                    <tr>
+                        <th>Course Code</th>
+                        <th>Course Name</th>
+                        <th>Course Type</th>
+                        <th>Status</th>
+
+                    </tr>
+
+                    @foreach (var item in Model.Enrollments)
+                    {
+
+                        if (item.Course != null && item.Course.Type == "CMD")
+                        {
+                            <tr>
+                                <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
+                                <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
+                                <td>
+                                    @{
+                            List<SelectListItem> listItems = new List<SelectListItem>();
+                            if (item.Status == "Completed")
+                            {
+                                listItems.Add(new SelectListItem { Text = "Completed", Value = "Completed", Selected = true });
+                            }
+                            else
+                            {
+                                listItems.Add(new SelectListItem { Text = "Completed", Value = "Completed" });
+                            }
+
+                            if (item.Status == "Enrolled")
+                            {
+                                listItems.Add(new SelectListItem { Text = "Enrolled", Value = "Enrolled", Selected = true });
+                            }
+                            else
+                            {
+                                listItems.Add(new SelectListItem { Text = "Enrolled", Value = "Enrolled" });
+                            }
+
+                            if (item.Status == "Not Taken")
+                            {
+                                listItems.Add(new SelectListItem { Text = "Not Taken", Value = "Not Taken", Selected = true });
+                            }
+                            else
+                            {
+                                listItems.Add(new SelectListItem { Text = "Not Taken", Value = "Not Taken" });
+                            }
+
+                                    }
+
+                                    @using (Html.BeginForm("UpdateEnrollment", "Student", FormMethod.Post, new { id = item.CourseID }))
+                                    {
+                                        @Html.Hidden("CourseID", item.CourseID)
+                                        @Html.Hidden("StudentID", item.StudentID)
+                                        @Html.DropDownList("Status", listItems, new { onchange = "this.form.submit();" })
+                                    }
+
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+        </div>
+
+
+
+    </div>
 }
 
 
-                        </table>
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-md-10">
-                        <h3>Major Requisite</h3>
-                        <table class="table">
-                            <tr>
-                                <th>Course Code</th>
-                                <th>Course Name</th>
-                                <th>Course Type</th>
-                                <th>Status</th>
-
-                            </tr>
-
-                            @foreach (var item in Model.Enrollments)
-                            {
-
-                                if (item.Course != null && item.Course.Type == "Major Requisite")
-                                {
-                                    <tr>
-                                        <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
-                                        <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
-                                        <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
-                                        <td> @Html.DisplayFor(modelItem => item.Status) </td>
-                                    </tr>
-                                }
-                            }
-
-
-                        </table>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-10">
-                        <h3>Major Elective</h3>
-                        <table class="table">
-                            <tr>
-                                <th>Course Code</th>
-                                <th>Course Name</th>
-                                <th>Course Type</th>
-                                <th>Status</th>
-
-                            </tr>
-
-                            @foreach (var item in Model.Enrollments)
-                            {
-
-                                if (item.Course != null && item.Course.Type == "Major Elective")
-                                {
-                                    <tr>
-                                        <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
-                                        <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
-                                        <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
-                                        <td> @Html.DisplayFor(modelItem => item.Status) </td>
-                                    </tr>
-                                }
-                            }
-
-
-                        </table>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-10">
-                        <h3>Internship</h3>
-                        <table class="table">
-                            <tr>
-                                <th>Course Code</th>
-                                <th>Course Name</th>
-                                <th>Course Type</th>
-                                <th>Status</th>
-
-                            </tr>
-
-                            @foreach (var item in Model.Enrollments)
-                            {
-
-                                if (item.Course != null && item.Course.Type == "Internship")
-                                {
-                                    <tr>
-                                        <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
-                                        <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
-                                        <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
-                                        <td> @Html.DisplayFor(modelItem => item.Status) </td>
-                                    </tr>
-                                }
-                            }
-
-
-                        </table>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-10">
-                        <h3>Creative Media Design Minor</h3>
-                        <table class="table">
-                            <tr>
-                                <th>Course Code</th>
-                                <th>Course Name</th>
-                                <th>Course Type</th>
-                                <th>Status</th>
-
-                            </tr>
-
-                            @foreach (var item in Model.Enrollments)
-                            {
-
-                                if (item.Course != null && item.Course.Type == "CMD")
-                                {
-                                    <tr>
-                                        <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
-                                        <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
-                                        <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
-                                        <td> @Html.DisplayFor(modelItem => item.Status) </td>
-                                    </tr>
-                                }
-                            }
-
-
-                        </table>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-10">
-                        <h3>Digital Marketing Minor</h3>
-                        <table class="table">
-                            <tr>
-                                <th>Course Code</th>
-                                <th>Course Name</th>
-                                <th>Course Type</th>
-                                <th>Status</th>
-
-                            </tr>
-
-                            @foreach (var item in Model.Enrollments)
-                            {
-
-                                if (item.Course != null && item.Course.Type == "MKT")
-                                {
-                                    <tr>
-                                        <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
-                                        <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
-                                        <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
-                                        <td> @Html.DisplayFor(modelItem => item.Status) </td>
-                                    </tr>
-                                }
-                            }
-
-
-                        </table>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Save" class="btn btn-default" />
-                    </div>
-                </div>
-            </div>
-            }
 
 
             <div>
