@@ -153,8 +153,6 @@ namespace STIUApp.Controllers
                         new Enrollment{StudentID = student.StudentID, CourseID="SOC105", Taken = false, Status = "Not Taken"},
                     };
 
-                    enrollments.ForEach(s => db.Enrollments.Add(s));
-                    db.SaveChanges();
                 }
 
                 //Check new student major
