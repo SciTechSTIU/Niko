@@ -42,31 +42,6 @@
         <dd>
             @Html.DisplayFor(model => model.Major)
         </dd>
-
-        <dd>
-            <table class="table">
-                <tr><th>Total Credit
-                    @{int Counter = 0;}
-                    @foreach (var item in Model.Enrollments)
-                    {
-
-                        if (item.Course != null && item.Status == "Completed")
-                        {
-                            Counter = Counter + item.Course.Credits;
-                        }
-                    }
-                </th>
-                </tr>
-                <tr>
-                    <th>
-                        <label>@Counter</label>
-                    </th>
-                </tr>
-  
-                      
-            </table>
-
-        </dd>
          
         <dt> @Html.DisplayNameFor(model => model.Enrollments) </dt>
         <dd> 
@@ -86,6 +61,33 @@
         } 
 
         </table> 
+        </dd>
+
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>
+                        Total Credit
+                        @{int Counter = 0;}
+                        @foreach (var item in Model.Enrollments)
+                        {
+
+                            if (item.Course != null && item.Status == "Completed")
+                            {
+                                Counter = Counter + item.Course.Credits;
+                            }
+                        }
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <label>@Counter</label>
+                    </th>
+                </tr>
+
+
+            </table>
+
         </dd>
 
 
