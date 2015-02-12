@@ -115,7 +115,9 @@ namespace STIUApp.Controllers
                 db.Students.Add(student);
                 db.SaveChanges();
 
-                if (student.Major != null)
+                //to create the new Gen Ed
+
+                if (student.Major == "IT")
                 {
                     var enrollments = new List<Enrollment>
                     {
@@ -150,6 +152,9 @@ namespace STIUApp.Controllers
                         new Enrollment{StudentID = student.StudentID, CourseID="SOC104", Taken = false, Status = "Not Taken"},
                         new Enrollment{StudentID = student.StudentID, CourseID="SOC105", Taken = false, Status = "Not Taken"},
                     };
+
+                    enrollments.ForEach(s => db.Enrollments.Add(s));
+                    db.SaveChanges();
                 }
 
                 //Check new student major
