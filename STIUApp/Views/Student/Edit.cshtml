@@ -4,15 +4,33 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h3>Edit</h3>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
+     
     <div class="form-horizontal">
-        <h4>Student</h4>
+        @{ int countt = 0;
+         foreach (var item in Model.Enrollments)
+         {
+             if (item.Course != null && item.Status == "Completed")
+             {
+                 countt += item.Course.Credits;
+             }
+         }
+         
+         double doubleVal = System.Convert.ToDouble(countt);
+         double completion = (doubleVal / 137) * 100;
+         int cint = System.Convert.ToInt32(completion);
+         
+        }
+
+
+        <h1>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName) (@cint % Completed)</h1>
+        <h3>@Html.DisplayFor(model => model.StudentID)</h3>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.StudentID)
@@ -69,7 +87,16 @@
 
         <div class="form-group">
             <div class="col-md-10">
-                <h3>General Education</h3>
+
+                <h3 id="General Education">General Education (@{
+                    int count = 0;
+                    foreach (var item in Model.Enrollments)
+                    {
+                        if (item.Course != null && item.Course.Type == "General Education" && item.Status == "Completed") {
+                            count += item.Course.Credits;
+                        }
+                    }} 
+                @count out of 35 credits)</h3>
                 <table class="table">
                     <tr>
                         <th>Course Code</th>
@@ -79,16 +106,27 @@
 
                     </tr>
 
-                                        @foreach (var item in Model.Enrollments)
+                    @foreach (var item in Model.Enrollments)
                     {
-
+  
                         if (item.Course != null && item.Course.Type == "General Education")
                         {
-                            if (item.Status == "Completed") { 
-                                @:<tr style="background-color:forestgreen">
-                        }
+ 
+                            <tr @{switch (item.Status)
+                            {
+                                    case "Completed":
+                                        @:style="background-color:rgb(186, 245, 186)"
+                                        break;
+                                    case "Not Taken":
+                                        break;
+                                    case "Enrolled":
+                                         @:style="background-color:rgb(141, 218, 228)"
+                                        break;
+                                    default:
+                                        break;
+                            }}>
 
-                               <tr>     
+                                    
 
                                 <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
                                 <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
@@ -146,7 +184,18 @@
 
         <div class="form-group">
             <div class="col-md-10">
-                <h3>Basic Core</h3>
+                <h3 id="Basic Core">
+                    Basic Core (@{
+                    int countbc = 0;
+                    foreach (var item in Model.Enrollments)
+                    {
+                        if (item.Course != null && item.Course.Type == "Basic Core" && item.Status == "Completed")
+                        {
+                            countbc += item.Course.Credits;
+                        }
+                    }}
+                    @countbc out of 30 credits)
+                </h3>
                 <table class="table">
                     <tr>
                         <th>Course Code</th>
@@ -161,15 +210,21 @@
 
                         if (item.Course != null && item.Course.Type == "Basic Core")
                         {
-                            if (item.Status == "Completed")
-                            {
-                                @:<tr style="background-color:forestgreen">
-                        } <tr>
+                            <tr @{switch (item.Status) { 
+                                      case "Completed": @: style="background-color:rgb(186, 245, 186)"
+                                      break; 
+                                      case "Not Taken": 
+                                      break; 
+                                      case "Enrolled": @: style="background-color:rgb(141, 218, 228)"
+                                      break; 
+                                      default: break; }}>
+
+
                                 <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
                                 <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
                                 <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
                                 <td>
-                            @{
+                                    @{
                             List<SelectListItem> listItems = new List<SelectListItem>();
                             if (item.Status == "Completed")
                             {
@@ -198,7 +253,7 @@
                                 listItems.Add(new SelectListItem { Text = "Not Taken", Value = "Not Taken" });
                             }
 
-                            }
+                                    }
 
                                     @using (Html.BeginForm("UpdateEnrollment", "Student", FormMethod.Post, new { id = item.CourseID }))
                                     {
@@ -219,7 +274,18 @@
 
         <div class="form-group">
             <div class="col-md-10">
-                <h3>Major Requisite</h3>
+                <h3 id="Major Requisite">
+                    Major Requisite (@{
+                    int countmr = 0;
+                    foreach (var item in Model.Enrollments)
+                    {
+                        if (item.Course != null && item.Course.Type == "Major Requisite" && item.Status == "Completed")
+                        {
+                            countmr += item.Course.Credits;
+                        }
+                    }}
+                    @countmr out of 30 credits)
+                </h3>
                 <table class="table">
                     <tr>
                         <th>Course Code</th>
@@ -234,7 +300,10 @@
 
                         if (item.Course != null && item.Course.Type == "Major Requisite")
                         {
-                            <tr>
+                            <tr @{switch (item.Status) { case "Completed": @: style="background-color:rgb(186, 245, 186)"
+                                                                      break; case "Not Taken": break; case "Enrolled": @: style="background-color:rgb(141, 218, 228)"
+                                                                      break; default: break; }}>
+
                                 <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
                                 <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
                                 <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
@@ -288,7 +357,18 @@
 
         <div class="form-group">
             <div class="col-md-10">
-                <h3>Major Elective</h3>
+                <h3 id="Major Elective">
+                    Major Elective (@{
+                    int countme = 0;
+                    foreach (var item in Model.Enrollments)
+                    {
+                        if (item.Course != null && item.Course.Type == "Major Elective" && item.Status == "Completed")
+                        {
+                            countme += item.Course.Credits;
+                        }
+                    }}
+                    @countme out of 36 credits)
+                </h3>
                 <table class="table">
                     <tr>
                         <th>Course Code</th>
@@ -303,7 +383,10 @@
 
                         if (item.Course != null && item.Course.Type == "Major Elective")
                         {
-                            <tr>
+                            <tr @{switch (item.Status) { case "Completed": @: style="background-color:rgb(186, 245, 186)"
+                                                                      break; case "Not Taken": break; case "Enrolled": @: style="background-color:rgb(141, 218, 228)"
+                                                                      break; default: break; }}>
+
                                 <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
                                 <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
                                 <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
@@ -359,7 +442,18 @@
 
         <div class="form-group">
             <div class="col-md-10">
-                <h3>Internship</h3>
+                <h3 id="Internship">
+                    Internship (@{
+                    int counti = 0;
+                    foreach (var item in Model.Enrollments)
+                    {
+                        if (item.Course != null && item.Course.Type == "Internship" && item.Status == "Completed")
+                        {
+                            counti += item.Course.Credits;
+                        }
+                    }}
+                    @counti out of 6 credits)
+                </h3>
                 <table class="table">
                     <tr>
                         <th>Course Code</th>
@@ -374,7 +468,9 @@
 
                         if (item.Course != null && item.Course.Type == "Internship")
                         {
-                            <tr>
+                            <tr @{switch (item.Status) { case "Completed": @: style="background-color:rgb(186, 245, 186)"
+                                                                      break; case "Not Taken": break; case "Enrolled": @: style="background-color:rgb(141, 218, 228)"
+                                                                      break; default: break; }}>
                                 <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
                                 <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
                                 <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
@@ -430,7 +526,18 @@
 
         <div class="form-group">
             <div class="col-md-10">
-                <h3>Digital Marketing Minor</h3>
+                <h3 id="MKT">
+                    Digital Marketing Minor (@{
+                    int countmkt = 0;
+                    foreach (var item in Model.Enrollments)
+                    {
+                        if (item.Course != null && item.Course.Type == "MKT" && item.Status == "Completed")
+                        {
+                            countmkt += item.Course.Credits;
+                        }
+                    }}
+                    @countmkt out of 15 credits)
+                </h3>
                 <table class="table">
                     <tr>
                         <th>Course Code</th>
@@ -445,7 +552,9 @@
 
                         if (item.Course != null && item.Course.Type == "MKT")
                         {
-                            <tr>
+                            <tr @{switch (item.Status) { case "Completed": @: style="background-color:rgb(186, 245, 186)"
+                                                                      break; case "Not Taken": break; case "Enrolled": @: style="background-color:rgb(141, 218, 228)"
+                                                                      break; default: break; }}>
                                 <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
                                 <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
                                 <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>
@@ -501,7 +610,18 @@
 
         <div class="form-group">
             <div class="col-md-10">
-                <h3>Creative Media Design Minor</h3>
+                <h3 id="CMD">
+                    Creative Media Design Minor (@{
+                    int countcmd = 0;
+                    foreach (var item in Model.Enrollments)
+                    {
+                        if (item.Course != null && item.Course.Type == "CMD" && item.Status == "Completed")
+                        {
+                            countcmd += item.Course.Credits;
+                        }
+                    }}
+                    @countcmd out of 15 credits)
+                </h3>
                 <table class="table">
                     <tr>
                         <th>Course Code</th>
@@ -516,7 +636,9 @@
 
                         if (item.Course != null && item.Course.Type == "CMD")
                         {
-                            <tr>
+                            <tr @{switch (item.Status) { case "Completed": @: style="background-color:rgb(186, 245, 186)"
+                                                                      break; case "Not Taken": break; case "Enrolled": @: style="background-color:rgb(141, 218, 228)"
+                                                                      break; default: break; }}>
                                 <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td>
                                 <td> @Html.DisplayFor(modelItem => item.Course.Title) </td>
                                 <td> @Html.DisplayFor(modelItem => item.Course.Type) </td>

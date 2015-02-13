@@ -6,7 +6,10 @@ using System.Web;
 
 namespace STIUApp.DAL
 {
-    public class SchoolInitializer : System.Data.Entity.DropCreateDatabaseAlways<SchoolContext>
+    //DropCreateDatabaseIfModelChanges
+    //DropCreateDatabaseAlways
+
+    public class SchoolInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<SchoolContext>
     {
         //Seed function to create test data
         protected override void Seed(SchoolContext context)

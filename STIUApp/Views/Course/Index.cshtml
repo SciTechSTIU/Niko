@@ -33,19 +33,10 @@
             @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            Credits
-        </th>
-        <th>
-            @Html.ActionLink("Completed", "Index", new { sortOrder = ViewBag.CompletedSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
             @Html.ActionLink("Enrolled", "Index", new { sortOrder = ViewBag.EnrolledSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.ActionLink("NotTaken", "Index", new { sortOrder = ViewBag.NotTakenSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            @Html.ActionLink("Faculty", "Index", new { sortOrder = ViewBag.FacultySortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Not Taken", "Index", new { sortOrder = ViewBag.NotTakenSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
             @Html.ActionLink("Type", "Index", new { sortOrder = ViewBag.TypeSortParm, currentFilter = ViewBag.CurrentFilter })
@@ -67,19 +58,10 @@
             @Html.ActionLink(item.Title, "Details", new { id = item.CourseID })
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Credits)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Completed)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Enrolled)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.NotTaken)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Faculty)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Type)

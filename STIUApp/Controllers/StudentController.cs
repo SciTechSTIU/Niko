@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using STIUApp.DAL;
 using STIUApp.Models;
 using PagedList;
+using System.Web.Routing;
 
 namespace STIUApp.Controllers
 {
@@ -338,6 +339,7 @@ namespace STIUApp.Controllers
                 //    db.SaveChanges();
                 //} 
 
+
                 return RedirectToAction("Edit", "Student", new { StudentID = student.StudentID });
             }
             return View(student);
@@ -352,7 +354,7 @@ namespace STIUApp.Controllers
 
 
 
-
+        //Student enrollment dropdown
         [HttpPost]
         public ActionResult UpdateEnrollment(string CourseID, int StudentID, string Status)
         {
@@ -379,7 +381,22 @@ namespace STIUApp.Controllers
                 }
            }
 
-           return RedirectToAction("Edit", "Student", new { StudentID = StudentID });
+            //Redirect to anchor tag of the updated course
+            var url = UrlHelper.GenerateUrl(
+                null,
+                "Edit",
+                "Student",
+                null,
+                null,
+                CourseID,
+                new RouteValueDictionary(new { StudentID = student.StudentID }),
+                Url.RouteCollection,
+                Url.RequestContext,
+                false
+            );
+            return Redirect(url);
+
+          // return RedirectToAction("Edit", "Student", new { StudentID = StudentID });
 
            //RedirectToRoute("Student/Edit", new { StudentID = StudentID });
         }
