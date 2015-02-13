@@ -42,7 +42,8 @@
         <dd>
             @Html.DisplayFor(model => model.Major)
         </dd>
-
+   
+           
         <dt> @Html.DisplayNameFor(model => model.Enrollments) </dt>
         <dd> 
         <table class="table"> 
@@ -59,8 +60,117 @@
             <td> @Html.DisplayFor(modelItem => item.Taken) </td> 
         </tr> 
         } 
-
         </table> 
+        </dd>
+
+
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Total Credit</th><th>General Education</th> <th>Basic Core</th> <th>Major Requisite</th><th>Major Elective</th><th>Internship</th><th>Minor</th>
+                </tr>
+                <tr>
+                    <td>@{int Counter = 0;}
+                        @foreach (var item in Model.Enrollments)
+                        {
+
+                            if (item.Course != null && item.Status == "Completed")
+                            {
+                                Counter = Counter + item.Course.Credits;
+                            }
+                          
+                        }
+                        <label>@Counter</label>
+                    </td>
+                    <td>
+                        @{int CountGE = 0;}
+                        @foreach(var item in Model.Enrollments)
+                        {
+                            if (item.Status == "Completed" && item.Course.Type == "General Education")
+                            {
+                                CountGE = CountGE + item.Course.Credits;
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{int CountBC = 0;}
+                        @foreach (var item in Model.Enrollments)
+                        {
+                            if (item.Status == "Completed" && item.Course.Type == "Basic Core")
+                            {
+                               
+                                    CountBC = CountBC + item.Course.Credits;
+               
+                            }
+                        }
+                        <label>@CountBC</label>
+
+                    </td>
+                    <td>
+                       @{int CountMR = 0;}
+                       @foreach (var item in Model.Enrollments)
+                       {
+                           if (item.Status == "Completed" && item.Course.Type == "Major Requisite")
+                           {
+                                   CountMR = CountMR + item.Course.Credits;
+                           }
+                       }
+                        <label>@CountMR</label>
+                    </td>
+                    <td>@{int CountME = 0;}
+                        @foreach (var item in Model.Enrollments)
+                        {
+                            if (item.Status == "Completed" && item.Course.Type == "Major Elective")
+                            {
+                                
+                                    CountME = CountME + item.Course.Credits;
+                             
+                            }
+                        }
+                    <label>@CountME</label>
+                    </td>
+                    <td>
+                        @{int CountIntern = 0;}
+                        @foreach (var item in Model.Enrollments)
+                        {
+                            if (item.Status == "Completed" && item.Course.Type == "Internship")
+                            {
+                             
+                                    CountIntern = CountIntern + item.Course.Credits;
+                            }
+                        }
+                        <label>@CountIntern</label>
+                    </td>
+                    <td>@{int CountMinor = 0;}
+                        @foreach (var item in Model.Enrollments)
+                        {
+                            if (item.Course != null && item.Course.Type == "MKT")
+                            {
+                                if (item.Status == "Complete")
+                                {
+                                    CountMinor = CountMinor + item.Course.Credits;
+                                }
+                            }
+                             if(item.Course != null && item.Course.Type == "CMD"){
+                                    
+                                }
+                                if (item.Status == "Complete")
+                                {
+                                    CountMinor = CountMinor + item.Course.Credits;
+                                }
+                        }
+                    <label>@CountMinor</label>
+                    </td>
+          
+                </tr>
+                <tr>
+                    <td><label>@Counter Out of 137 </label></td>
+                </tr>
+                <tr>
+                    <td><label>@Counter Out of 152 with 15 Minors</label></td>
+                </tr>
+            </table>
+
         </dd>
 
 

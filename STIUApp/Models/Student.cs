@@ -18,6 +18,7 @@ namespace STIUApp.Models
         public string Minor { get; set; }
 
 
+
         //Foreign key: enrollment (every student can have many enrollments)
         public virtual ICollection<Enrollment> Enrollments { get; set; }
 

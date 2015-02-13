@@ -112,15 +112,7 @@ namespace STIUApp.DAL
                 new Course{CourseID="CMD211", Title="Page Layout 1", Credits = 3, Faculty="IT",Type="CMD"},
                 new Course{CourseID="CMD221", Title="Typography 1", Credits = 3, Faculty="IT",Type="CMD"},
                 new Course{CourseID="CMD303", Title="User Experience", Credits= 3, Faculty="IT", Type="CMD"},
-            
-            
-            
-            
-            
-            
-            
-            
-            
+    
             };
 
             courses.ForEach(s => context.Courses.Add(s));

@@ -115,6 +115,46 @@ namespace STIUApp.Controllers
                 db.Students.Add(student);
                 db.SaveChanges();
 
+                //to create the new Gen Ed
+
+                if (student.Major == "IT")
+                {
+                    var enrollments = new List<Enrollment>
+                    {
+                        new Enrollment{StudentID = student.StudentID, CourseID="ENG101", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="ENG102", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="ENG103", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="MAT102", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="STA101", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="SCI105", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="MIS103", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="LIB299", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="BUS299", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="ART101", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="GEO101", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="HIS101", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="THA101", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="HIS102", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="HIS103", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="HIS104", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="MUS101", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="PHI101", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="ATH101", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="ECO101", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="POL101", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="PSY101", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="PSY102", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="SOC102", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="SOC101", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="SOC102", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="SOC103", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="POL103", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="SOC104", Taken = false, Status = "Not Taken"},
+                        new Enrollment{StudentID = student.StudentID, CourseID="SOC105", Taken = false, Status = "Not Taken"},
+                    };
+
+                }
+
                 //Check new student major
                 if (student.Major == "IT")
                 {
@@ -196,6 +236,7 @@ namespace STIUApp.Controllers
                     enrollments.ForEach(s => db.Enrollments.Add(s));
                     db.SaveChanges();
                 }
+      
 
                 //Check student minor
                 if (student.Minor == "CMD")
