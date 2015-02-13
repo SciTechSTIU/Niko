@@ -48,17 +48,19 @@
         <dd> 
         <table class="table"> 
         <tr> 
-            <th>Course ID</th> <th>Course Title</th> <th>Credits</th>  <th>Taken?</th> 
+            <th>Course ID</th> <th>Course Title</th> <th>Credits</th>  <th>Status</th> 
         </tr> 
 
         @foreach (var item in Model.Enrollments)
         {
+            if (item.Course != null) { 
         <tr> 
             <td> @Html.DisplayFor(modelItem => item.Course.CourseID) </td> 
             <td> @Html.DisplayFor(modelItem => item.Course.Title) </td> 
             <td> @Html.DisplayFor(modelItem => item.Course.Credits) </td> 
-            <td> @Html.DisplayFor(modelItem => item.Taken) </td> 
+            <td> @Html.DisplayFor(modelItem => item.Status) </td> 
         </tr> 
+            }
         } 
         </table> 
         </dd>
