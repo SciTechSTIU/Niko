@@ -117,7 +117,7 @@ namespace STIUApp.Controllers
 
                 //to create the new Gen Ed
 
-                if (student.Major == "IT")
+                if (student.Major != null)
                 {
                     var enrollments = new List<Enrollment>
                     {
