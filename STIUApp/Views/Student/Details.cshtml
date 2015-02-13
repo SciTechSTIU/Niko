@@ -86,9 +86,12 @@
                         @{int CountGE = 0;}
                         @foreach(var item in Model.Enrollments)
                         {
-                            if (item.Status == "Completed" && item.Course.Type == "General Education")
+                            if (item.Course != null && item.Course.Type == "General Education")
                             {
-                                CountGE = CountGE + item.Course.Credits;
+                                if (item.Status == "Completed")
+                                {
+                                    CountGE = CountGE + item.Course.Credits;
+                                }
                             }
                         }
                     </td>
@@ -96,10 +99,12 @@
                         @{int CountBC = 0;}
                         @foreach (var item in Model.Enrollments)
                         {
-                            if (item.Status == "Completed" && item.Course.Type == "Basic Core")
+                            if (item.Course != null && item.Course.Type == "Basic Core")
                             {
-                               
+                                if (item.Status == "Completed")
+                                {
                                     CountBC = CountBC + item.Course.Credits;
+                                }
                
                             }
                         }
@@ -110,9 +115,12 @@
                        @{int CountMR = 0;}
                        @foreach (var item in Model.Enrollments)
                        {
-                           if (item.Status == "Completed" && item.Course.Type == "Major Requisite")
+                           if (item.Course != null && item.Course.Type == "Major Requisite")
                            {
+                               if (item.Status == "Completed")
+                               {
                                    CountMR = CountMR + item.Course.Credits;
+                               }
                            }
                        }
                         <label>@CountMR</label>
@@ -120,11 +128,12 @@
                     <td>@{int CountME = 0;}
                         @foreach (var item in Model.Enrollments)
                         {
-                            if (item.Status == "Completed" && item.Course.Type == "Major Elective")
+                            if (item.Course != null && item.Course.Type == "Major Elective")
                             {
-                                
+                                if (item.Status == "Completed")
+                                {
                                     CountME = CountME + item.Course.Credits;
-                             
+                                }
                             }
                         }
                     <label>@CountME</label>
@@ -133,10 +142,13 @@
                         @{int CountIntern = 0;}
                         @foreach (var item in Model.Enrollments)
                         {
-                            if (item.Status == "Completed" && item.Course.Type == "Internship")
+                            if (item.Course != null && item.Course.Type == "Internship")
                             {
-                             
+                                if (item.Status == "Completed")
+                                {
+
                                     CountIntern = CountIntern + item.Course.Credits;
+                                }
                             }
                         }
                         <label>@CountIntern</label>
