@@ -42,15 +42,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Major, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Major, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Major, new { htmlAttributes = new { @class = "form-control" } }) Possible values for major: IT
                 @Html.ValidationMessageFor(model => model.Major, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Minor, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Minor, htmlAttributes: new { @class = "control-label col-md-2" }) 
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Minor, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Minor, new { htmlAttributes = new { @class = "form-control" } }) Possible values for minor: MKT, CMD
                 @Html.ValidationMessageFor(model => model.Minor, "", new { @class = "text-danger" })
             </div>
         </div>
